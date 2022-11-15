@@ -1,0 +1,21 @@
+name: React Build
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs_on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+        
+    steps:
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v1
+      - name: npm install, build
+        run: |
+          npm install
+          npm run build
